@@ -105,9 +105,9 @@ public class Tools {
 	
 	public static int[][][] getAllOrientations(ArrayList<ArrayList<Integer>> indices, ArrayList<ArrayList<Integer>> subsets, int n) {
 		int[][][] orientations = new int[subsets.size()][n][n];
-
+		
 		for (int i = 0; i < subsets.size(); i++) {
-			for (int j = 0; j < n; j++) {
+			for (int j = 0; j < indices.size(); j++) {		
 				if (subsets.get(i).contains(j)) {
 					orientations[i][indices.get(j).get(0)][indices.get(j).get(1)] = 1;
 				} else {

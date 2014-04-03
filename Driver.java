@@ -10,6 +10,8 @@ public class Driver {
 		// matrix from sergey's paper that is proven to not admit any semi-transitive orientations (my code agrees)
 		int matrix2[][]={{0,1,1,1,1,0,0},{1,0,1,0,0,0,1},{1,1,0,1,0,1,0},{1,0,1,0,1,1,0},{1,0,0,1,0,0,1},{0,0,1,1,0,0,1},{0,1,0,0,1,1,0}};
 		
+		//int matrix2[][] = {{0,1,0,0,0,0,0},{1,0,1,0,0,0,0},{0,1,0,1,0,0,0},{0,0,1,0,1,0,0},{0,0,0,1,0,1,0},{0,0,0,0,1,0,1},{0,0,0,0,0,1,0}};
+		
 		//PathMatrix pathMatrix = new PathMatrix(matrix);
 		//pathMatrix.printPowers();
 		
@@ -19,10 +21,11 @@ public class Driver {
 		//	System.out.println("The graph is not semi transitive");
 		//}
 		
+		//new MatrixInputFrame();
 		
 		ArrayList<ArrayList<Integer>> indices = Tools.getIndicesOfOnes(matrix2);
 		ArrayList<ArrayList<Integer>> subsets = Tools.getSubsets(indices.size());
-		int orientations[][][] = Tools.getAllOrientations(indices, subsets, indices.size());
+		int orientations[][][] = Tools.getAllOrientations(indices, subsets, matrix2.length);
 		
 		// this prints all the matrices
 		/*
