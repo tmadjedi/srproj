@@ -1,20 +1,15 @@
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.geom.Point2D;
-import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Driver {
 	public static void main(String[] args) {
-		//int matrix[][] = {{0,1,1,1,0},{0,0,0,1,0},{0,0,0,1,0},{0,0,0,0,1},{0,0,0,0,0}};
 		
+		// test matrices
 		// undirected graph
 		//int matrix2[][] = {{0,1,1,1,0},{1,0,0,1,0},{1,0,0,1,0},{1,1,1,0,1},{0,0,0,1,0}};
+		//int matrix2[][] = {{0,1,0,0,0,0,0},{1,0,1,0,0,0,0},{0,1,0,1,0,0,0},{0,0,1,0,1,0,0},{0,0,0,1,0,1,0},{0,0,0,0,1,0,1},{0,0,0,0,0,1,0}};
 		
 		// matrix from sergey's paper that is proven to not admit any semi-transitive orientations (my code agrees)
-		int matrix2[][]={{0,1,1,1,1,0,0},{1,0,1,0,0,0,1},{1,1,0,1,0,1,0},{1,0,1,0,1,1,0},{1,0,0,1,0,0,1},{0,0,1,1,0,0,1},{0,1,0,0,1,1,0}};
-		
-		//int matrix2[][] = {{0,1,0,0,0,0,0},{1,0,1,0,0,0,0},{0,1,0,1,0,0,0},{0,0,1,0,1,0,0},{0,0,0,1,0,1,0},{0,0,0,0,1,0,1},{0,0,0,0,0,1,0}};
+		//int matrix2[][]={{0,1,1,1,1,0,0},{1,0,1,0,0,0,1},{1,1,0,1,0,1,0},{1,0,1,0,1,1,0},{1,0,0,1,0,0,1},{0,0,1,1,0,0,1},{0,1,0,0,1,1,0}};
 		
 		// this prints all the matrices
 		/*
@@ -30,6 +25,7 @@ public class Driver {
 			
 			System.out.println();
 		}*/
+		
 		
 		// run testPowers on all the matrices
 		//boolean semiTransitive = Tools.semiTransitiveCheck(matrix2);
@@ -61,7 +57,7 @@ public class Driver {
 				
 				System.out.println("i: " + i);
 				System.out.println("s: " + s.toString());
-				if (Tools.placeholder(scheme)) {
+				if (Tools.semiTransitiveCheck(scheme)) {
 					System.out.println("Scheme admits STO");
 				} else {
 					System.out.println("Scheme does not admit STO");
@@ -72,45 +68,5 @@ public class Driver {
 			
 		}
 		//end stuff
-		
-		/*s.add(3);
-		scheme = Tools.generatePathScheme(13,s);
-		
-		System.out.println(Tools.semiTransitiveCheck(scheme));
-		*/
-		
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
-	
-
 }

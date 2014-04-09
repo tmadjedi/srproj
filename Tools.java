@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-import javax.swing.JFrame;
 
 public class Tools {
 	
@@ -91,8 +88,10 @@ public class Tools {
 		return list;
 	}
 	
-	// returns the power set of {0,...,n}
-	public static boolean placeholder(int[][] adj) {
+	// this is a megaloop for the sake of memory
+	// generates an orientation, checks if it's semi transitive
+	// if it is, we're done. if not, keep going
+	public static boolean semiTransitiveCheck(int[][] adj) {
 		ArrayList<ArrayList<Integer>> indices = Tools.getIndicesOfOnes(adj);
 		ArrayList<Integer> subset;
 		int[][] orientation = new int[adj.length][adj.length];;
@@ -132,48 +131,15 @@ public class Tools {
 					}
 					System.out.println();
 				}
+				
+				System.out.println("orientation number: " + i);
+				
 				return true;
 			}
-		    
 		}
 		
 		return false;
 	}
-	
-	/*public static boolean semiTransitiveCheck(int[][] adj) {
-		ArrayList<ArrayList<Integer>> indices = Tools.getIndicesOfOnes(adj);
-		ArrayList<ArrayList<Integer>> subsets = Tools.getSubsets(indices.size());
-		int[][] orientation = new int[adj.length][adj.length];;
-		
-		for (int i = 0; i < subsets.size(); i++) {
-			orientation = null;
-			orientation = new int[adj.length][adj.length];
-			
-			for (int k = 0; k < indices.size(); k++) {
-				if (subsets.get(i).contains(k)) {
-					orientation[indices.get(k).get(0)][indices.get(k).get(1)] = 1;
-				} else {
-					orientation[indices.get(k).get(1)][indices.get(k).get(0)] = 1;
-				}
-			}
-			
-			if (Tools.testPowers(new PathMatrix(orientation))) {
-				return true;
-			}
-		}
-		
-				
-				/*
-		//ArrayList<Integer> semiTransIndices = new ArrayList<Integer>();
-		for (int i = 0; i < subsets.size(); i++) {
-			if (Tools.testPowers(new PathMatrix(orientations[i]))) {
-				return true;
-				//semiTransIndices.add(i);
-			}
-		}*/
-		
-		/*return false;
-	}*/
 	
 	// iterative solution, can be optimized
 	// nxn matrix, s is M
