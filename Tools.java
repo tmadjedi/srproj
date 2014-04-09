@@ -92,33 +92,55 @@ public class Tools {
 	}
 	
 	// returns the power set of {0,...,n}
-	public static ArrayList<ArrayList<Integer>> getSubsets(int n) {
-		ArrayList<ArrayList<Integer>> subsets = new ArrayList<ArrayList<Integer>>();
+	public static boolean placeholder(int[][] adj) {
+		ArrayList<ArrayList<Integer>> indices = Tools.getIndicesOfOnes(adj);
+		ArrayList<Integer> subset;
+		int[][] orientation = new int[adj.length][adj.length];;
 		
 		//add the empty set
-		subsets.add(new ArrayList<Integer>());
+
 				
 		// 2^n ways, so shift 1 over n times
-		int allMasks = (1 << n);
+		long allMasks = ((long)1 << indices.size());
+		System.out.println(allMasks);
 				
 		// this pretty much just counts in binary, adds index to the subset
 		// if it appears in the binary number its on
-		for (int i = 1; i < allMasks; i++) {
-			ArrayList<Integer> subset = new ArrayList<Integer>();
+		for (long i = 1; i < allMasks; i++) {
+			subset = new ArrayList<Integer>();
 					
-		    for (int j = 0; j < n; j++) {
+		    for (int j = 0; j < indices.size(); j++) {
 		        if ((i & (1 << j)) > 0) { //The j-th element is used
 		           subset.add(j);
 		        }
 		    }
 		    
-		    subsets.add(subset);
+		    orientation = new int[adj.length][adj.length];
+		    
+			for (int k = 0; k < indices.size(); k++) {
+				if (subset.contains(k)) {
+					orientation[indices.get(k).get(0)][indices.get(k).get(1)] = 1;
+				} else {
+					orientation[indices.get(k).get(1)][indices.get(k).get(0)] = 1;
+				}
+			}
+			
+			if (Tools.testPowers(new PathMatrix(orientation))) {
+				for (int q = 0; q < orientation.length; q++) {
+					for (int r = 0; r < orientation.length; r++) {
+						System.out.print(orientation[q][r] + " ");
+					}
+					System.out.println();
+				}
+				return true;
+			}
+		    
 		}
 		
-		return subsets;
+		return false;
 	}
 	
-	public static boolean semiTransitiveCheck(int[][] adj) {
+	/*public static boolean semiTransitiveCheck(int[][] adj) {
 		ArrayList<ArrayList<Integer>> indices = Tools.getIndicesOfOnes(adj);
 		ArrayList<ArrayList<Integer>> subsets = Tools.getSubsets(indices.size());
 		int[][] orientation = new int[adj.length][adj.length];;
@@ -127,11 +149,11 @@ public class Tools {
 			orientation = null;
 			orientation = new int[adj.length][adj.length];
 			
-			for (int j = 0; j < indices.size(); j++) {
-				if (subsets.get(i).contains(j)) {
-					orientation[indices.get(j).get(0)][indices.get(j).get(1)] = 1;
+			for (int k = 0; k < indices.size(); k++) {
+				if (subsets.get(i).contains(k)) {
+					orientation[indices.get(k).get(0)][indices.get(k).get(1)] = 1;
 				} else {
-					orientation[indices.get(j).get(1)][indices.get(j).get(0)] = 1;
+					orientation[indices.get(k).get(1)][indices.get(k).get(0)] = 1;
 				}
 			}
 			
@@ -150,8 +172,8 @@ public class Tools {
 			}
 		}*/
 		
-		return false;
-	}
+		/*return false;
+	}*/
 	
 	// iterative solution, can be optimized
 	// nxn matrix, s is M

@@ -8,8 +8,6 @@ public class Driver {
 	public static void main(String[] args) {
 		//int matrix[][] = {{0,1,1,1,0},{0,0,0,1,0},{0,0,0,1,0},{0,0,0,0,1},{0,0,0,0,0}};
 		
-		System.out.println(Tools.getSubsets(27).toString());
-		
 		// undirected graph
 		//int matrix2[][] = {{0,1,1,1,0},{1,0,0,1,0},{1,0,0,1,0},{1,1,1,0,1},{0,0,0,1,0}};
 		
@@ -34,15 +32,15 @@ public class Driver {
 		}*/
 		
 		// run testPowers on all the matrices
-		boolean semiTransitive = Tools.semiTransitiveCheck(matrix2);
+		//boolean semiTransitive = Tools.semiTransitiveCheck(matrix2);
 		
 		// result
-		if (semiTransitive) {
-			System.out.println("The graph admits a semi-transitive orientation");
+		//if (semiTransitive) {
+		//	System.out.println("The graph admits a semi-transitive orientation");
 			//System.out.println(semiTransIndices.toString());
-		} else {
-			System.out.println("The graph does not admit a semi-transitive orientation");
-		}
+		//} else {
+		//	System.out.println("The graph does not admit a semi-transitive orientation");
+		//}
 		
 		
 		// stuff
@@ -52,7 +50,7 @@ public class Driver {
 		int n = 100;
 		
 		
-		for (int i = 11; i < n; i++) {
+		for (int i = 18; i < n; i++) {
 			for (int j = 3; j <= i; j++) {
 				s = new HashSet<Integer>();
 				s.add(j);
@@ -63,7 +61,7 @@ public class Driver {
 				
 				System.out.println("i: " + i);
 				System.out.println("s: " + s.toString());
-				if (Tools.semiTransitiveCheck(scheme)) {
+				if (Tools.placeholder(scheme)) {
 					System.out.println("Scheme admits STO");
 				} else {
 					System.out.println("Scheme does not admit STO");
