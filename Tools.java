@@ -1,7 +1,12 @@
+import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import javax.swing.JFrame;
 
 public class Tools {
 	
@@ -34,6 +39,16 @@ public class Tools {
 	// tests powers 2,...,n against A for shortcuts
 	public static boolean testPowers(PathMatrix pathMatrix) {
 		PathMatrix[] powers = pathMatrix.getPowers();
+		
+		// check for cycles (entries on the diagonal)
+		// this could be smooshed into the other loop at the price of readability
+		for (int i = 0; i < powers.length; i++) {
+			for (int j = 0; j < powers.length; j++) {
+				if (powers[i].getPaths(j,j).size() > 0) {
+					return false;
+				}
+			}
+		}
 		
 		for (int i = 1; i < powers.length; i++) {
 			for (int j = 0; j < powers.length; j++) {
@@ -103,6 +118,7 @@ public class Tools {
 		return subsets;
 	}
 	
+	// n is size of original adjacency matrix
 	public static int[][][] getAllOrientations(ArrayList<ArrayList<Integer>> indices, ArrayList<ArrayList<Integer>> subsets, int n) {
 		int[][][] orientations = new int[subsets.size()][n][n];
 		
@@ -118,4 +134,63 @@ public class Tools {
 		
 		return orientations;
 	}
+	
+	public static boolean semiTransitiveCheck(int[][] adj) {
+		ArrayList<ArrayList<Integer>> indices = Tools.getIndicesOfOnes(adj);
+		ArrayList<ArrayList<Integer>> subsets = Tools.getSubsets(indices.size());
+		int orientations[][][] = Tools.getAllOrientations(indices, subsets, adj.length);
+		
+		//ArrayList<Integer> semiTransIndices = new ArrayList<Integer>();
+		for (int i = 0; i < subsets.size(); i++) {
+			if (Tools.testPowers(new PathMatrix(orientations[i]))) {
+				return true;
+				//semiTransIndices.add(i);
+			}
+		}
+		
+		return false;
+	}
+	
+	// iterative solution, can be optimized
+	public static int[][] generatePathScheme(int n, HashSet<Integer> s) {
+		
+		int[][] adj = new int[n][n];
+		
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				if (s.contains(Math.abs(i-j))) {
+					adj[i][j] = 1;
+				}
+			}
+		}
+		
+		return adj;
+	}
+	
+	public static Point2D[] getPoints(int n) {
+		Point2D[] points = new Point2D[n];
+		
+		double theta = (2 * Math.PI) / n; 
+		
+		for (int i = 0; i < n; i++) {
+			points[i] = new Point2D.Double(Math.cos(theta * i), Math.sin(theta * i));
+		}
+		
+		return points;
+	}
+	
+	public static ArrayList<Point> getEdges(int[][] adj) {
+		ArrayList<Point> edges = new ArrayList<Point>();
+		
+		for (int i = 0; i < adj.length; i++) {
+			for (int j = 0; j < adj.length; j++) {
+				if (adj[i][j] != 0) {
+					edges.add(new Point(i,j));
+				}
+			}
+		}
+		
+		return edges;
+	}
+	
 }
