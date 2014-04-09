@@ -8,28 +8,15 @@ public class Driver {
 	public static void main(String[] args) {
 		//int matrix[][] = {{0,1,1,1,0},{0,0,0,1,0},{0,0,0,1,0},{0,0,0,0,1},{0,0,0,0,0}};
 		
+		System.out.println(Tools.getSubsets(27).toString());
+		
 		// undirected graph
 		//int matrix2[][] = {{0,1,1,1,0},{1,0,0,1,0},{1,0,0,1,0},{1,1,1,0,1},{0,0,0,1,0}};
 		
 		// matrix from sergey's paper that is proven to not admit any semi-transitive orientations (my code agrees)
-		//int matrix2[][]={{0,1,1,1,1,0,0},{1,0,1,0,0,0,1},{1,1,0,1,0,1,0},{1,0,1,0,1,1,0},{1,0,0,1,0,0,1},{0,0,1,1,0,0,1},{0,1,0,0,1,1,0}};
+		int matrix2[][]={{0,1,1,1,1,0,0},{1,0,1,0,0,0,1},{1,1,0,1,0,1,0},{1,0,1,0,1,1,0},{1,0,0,1,0,0,1},{0,0,1,1,0,0,1},{0,1,0,0,1,1,0}};
 		
 		//int matrix2[][] = {{0,1,0,0,0,0,0},{1,0,1,0,0,0,0},{0,1,0,1,0,0,0},{0,0,1,0,1,0,0},{0,0,0,1,0,1,0},{0,0,0,0,1,0,1},{0,0,0,0,0,1,0}};
-		
-		//PathMatrix pathMatrix = new PathMatrix(matrix);
-		//pathMatrix.printPowers();
-		
-		//if (Tools.testPowers(pathMatrix)) {
-		//	System.out.println("The graph is semi-transitive");
-		//} else {
-		//	System.out.println("The graph is not semi transitive");
-		//}
-		
-		//new MatrixInputFrame();
-		
-		//ArrayList<ArrayList<Integer>> indices = Tools.getIndicesOfOnes(matrix2);
-		//ArrayList<ArrayList<Integer>> subsets = Tools.getSubsets(indices.size());
-		//int orientations[][][] = Tools.getAllOrientations(indices, subsets, matrix2.length);
 		
 		// this prints all the matrices
 		/*
@@ -47,8 +34,8 @@ public class Driver {
 		}*/
 		
 		// run testPowers on all the matrices
-		//boolean semiTransitive = Tools.semiTransitiveCheck(matrix2);
-		/*
+		boolean semiTransitive = Tools.semiTransitiveCheck(matrix2);
+		
 		// result
 		if (semiTransitive) {
 			System.out.println("The graph admits a semi-transitive orientation");
@@ -56,13 +43,12 @@ public class Driver {
 		} else {
 			System.out.println("The graph does not admit a semi-transitive orientation");
 		}
-		*/
+		
 		
 		// stuff
-		/*
 		HashSet<Integer> s = new HashSet<Integer>();
 		int[][] scheme;
-		s.add(3);
+		s.add(2);
 		int n = 100;
 		
 		
@@ -86,7 +72,7 @@ public class Driver {
 				System.out.println();
 			}
 			
-		}*/
+		}
 		//end stuff
 		
 		/*s.add(3);
@@ -95,8 +81,7 @@ public class Driver {
 		System.out.println(Tools.semiTransitiveCheck(scheme));
 		*/
 		
-		//GraphPicture g = new GraphPicture();
-		//g.paint(null);
+
 		
 		
 		

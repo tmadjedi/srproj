@@ -118,40 +118,43 @@ public class Tools {
 		return subsets;
 	}
 	
-	// n is size of original adjacency matrix
-	public static int[][][] getAllOrientations(ArrayList<ArrayList<Integer>> indices, ArrayList<ArrayList<Integer>> subsets, int n) {
-		int[][][] orientations = new int[subsets.size()][n][n];
-		
-		for (int i = 0; i < subsets.size(); i++) {
-			for (int j = 0; j < indices.size(); j++) {		
-				if (subsets.get(i).contains(j)) {
-					orientations[i][indices.get(j).get(0)][indices.get(j).get(1)] = 1;
-				} else {
-					orientations[i][indices.get(j).get(1)][indices.get(j).get(0)] = 1;
-				}
-			}
-		}
-		
-		return orientations;
-	}
-	
 	public static boolean semiTransitiveCheck(int[][] adj) {
 		ArrayList<ArrayList<Integer>> indices = Tools.getIndicesOfOnes(adj);
 		ArrayList<ArrayList<Integer>> subsets = Tools.getSubsets(indices.size());
-		int orientations[][][] = Tools.getAllOrientations(indices, subsets, adj.length);
+		int[][] orientation = new int[adj.length][adj.length];;
 		
+		for (int i = 0; i < subsets.size(); i++) {
+			orientation = null;
+			orientation = new int[adj.length][adj.length];
+			
+			for (int j = 0; j < indices.size(); j++) {
+				if (subsets.get(i).contains(j)) {
+					orientation[indices.get(j).get(0)][indices.get(j).get(1)] = 1;
+				} else {
+					orientation[indices.get(j).get(1)][indices.get(j).get(0)] = 1;
+				}
+			}
+			
+			if (Tools.testPowers(new PathMatrix(orientation))) {
+				return true;
+			}
+		}
+		
+				
+				/*
 		//ArrayList<Integer> semiTransIndices = new ArrayList<Integer>();
 		for (int i = 0; i < subsets.size(); i++) {
 			if (Tools.testPowers(new PathMatrix(orientations[i]))) {
 				return true;
 				//semiTransIndices.add(i);
 			}
-		}
+		}*/
 		
 		return false;
 	}
 	
 	// iterative solution, can be optimized
+	// nxn matrix, s is M
 	public static int[][] generatePathScheme(int n, HashSet<Integer> s) {
 		
 		int[][] adj = new int[n][n];
